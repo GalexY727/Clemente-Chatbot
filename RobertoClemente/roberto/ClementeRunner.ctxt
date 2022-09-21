@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=ClementeRunner
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\n\ Create\ a\ Clemente,\ give\ it\ user\ input,\ and\ print\ its\ replies.\n
+numComments=2
