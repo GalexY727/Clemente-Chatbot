@@ -5,25 +5,31 @@ public class Clemente {
     public String getGreeting() {
         return "Hello, I am Roberto Clemente. What is your name?";
     }
+    public boolean name = true;
     public String getResponse(String statement)
     {
         String response = "";
         statement=statement.toLowerCase();
+
         if (statement.length() == 0)
         {
             response = "Say something, please.";
         }
         else if (findKeyword(statement, "Name") >= 0)
         {
+            name = false;
             int psn = findKeyword(statement, "is", 0);
-            if (psn >= 0 && findKeyword(statement, "Roger", psn) >= 0)
+            if (psn >= 0 && findKeyword(statement, "Roger", psn) >= 0 || findKeyword(statement, "Jaffe", psn) >= 0)
             {
                 response = "Your name is " + statement.substring(psn + 3, statement.length()) + "? I have only heard stories of the great Roger Jaffe. It is a pleasure to meet you, my king.";
             } else {
                 response = "Hello " + statement.substring(psn + 3) + ", nice to meet you.";
             }
         }
-
+        else if (name){
+            name = false;
+            response = "Hello " + statement.substring(0, findKeyword(statement," ",0)) + ", nice to meet you.";
+        }
         else if (findKeyword(statement, "no") >= 0)
         {
             response = "Why so negative?";
@@ -46,7 +52,26 @@ public class Clemente {
         {
             response = transformIWantStatement(statement);
         }
-
+        else if (findKeyword(statement, "die",0) >= 0)
+        {
+            response = "I died in a plane crash in 1972. I was 38 years old.";
+        }
+        else if (findKeyword(statement, "marr", 0) >= 0)
+        {
+            response = "I married my wife Vera Zabala in 1962. We had two children together... I wonder what they do now.";
+        }
+        else if (findKeyword(statement, "born", 0) >= 0 || findKeyword(statement, "live",0) >= 0)
+        {
+            response = "I was born in 1934 in Carolina, Puerto Rico. I lived there until 1955 where I moved to the US for baseball.";
+        }
+        else if (findKeyword(statement, "profession", 0) >= 0 || findKeyword(statement, "job", 0) >= 0 || findKeyword(statement, "baseball", 0) >= 0 )
+        {
+            response = "I played baseball for the Pittsburgh Pirates, outfielding as number #21 for 18 years.";
+        }
+        else if (findKeyword(statement, "you", 0) >= 0 && findKeyword(statement, "children", 0) >= 0 || findKeyword(statement,"kids",0) >= 0)
+        {
+            response = "I had three lovely kids in Carolina; Roberto Jr., in 1965, Luis Roberto, in 1966, and Roberto Enrique, in 1969.\n...I only got to see Enrique until he was three years old.";
+        }
         else
         {
 
