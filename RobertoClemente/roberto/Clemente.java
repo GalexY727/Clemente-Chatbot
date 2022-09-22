@@ -28,26 +28,40 @@ public class Clemente {
         }
         else if (name){
             name = false;
-            response = "Hello " + statement.substring(0, findKeyword(statement," ",0)) + ", nice to meet you.";
+            response = "Hello " + statement + ", nice to meet you.";
+        }
+        else if (findKeyword(statement, "hi") >= 0 || findKeyword(statement, "hello") >= 0)
+        {
+            response = "Hello again, tell me about yourself.";
         }
         else if (findKeyword(statement, "no") >= 0)
         {
             response = "Why so negative?";
         }
-        else if (findKeyword(statement, "mother") >= 0
+        else if ((findKeyword(statement, "mother") >= 0
                 || findKeyword(statement, "father") >= 0
                 || findKeyword(statement, "sister") >= 0
                 || findKeyword(statement, "brother") >= 0)
+                && (!statement.contains("your")
+                || !statement.contains("you")))
         {
             response = "Tell me more about your family.";
         }
-
+        else if (findKeyword(statement, "who") >= 0
+                || findKeyword(statement, "about you") >= 0)
+        {
+            response = "I am Roberto Clemente, a baseball player who played for the Pittsburgh Pirates. I was born in Puerto Rico and died in a plane crash.";
+        }
         // Responses which require transformations
         else if (findKeyword(statement, "I want to", 0) >= 0)
         {
             response = transformIWantToStatement(statement);
         }
-        //  Part of student solution
+
+        else if (findKeyword(statement, "thank", 0) >= 0)
+        {
+            response = "Of course.";
+        }
         else if (findKeyword(statement, "I want", 0) >= 0)
         {
             response = transformIWantStatement(statement);
@@ -68,9 +82,13 @@ public class Clemente {
         {
             response = "I played baseball for the Pittsburgh Pirates, outfielding as number #21 for 18 years.";
         }
-        else if (findKeyword(statement, "you", 0) >= 0 && findKeyword(statement, "children", 0) >= 0 || findKeyword(statement,"kids",0) >= 0)
+        else if ((findKeyword(statement, "you", 0) >= 0 || findKeyword(statement, "your", 0) >= 0) && findKeyword(statement, "children", 0) >= 0 || findKeyword(statement,"kids",0) >= 0)
         {
             response = "I had three lovely kids in Carolina; Roberto Jr., in 1965, Luis Roberto, in 1966, and Roberto Enrique, in 1969.\n...I only got to see Enrique until he was three years old.";
+        }
+        else if ((findKeyword(statement, "you", 0) >= 0 || findKeyword(statement, "your", 0) >= 0) && findKeyword(statement, "wife", 0) >= 0)
+        {
+            response = "I married my wife Vera Zabala in 1962. We had two children together... I wonder what they do now.";
         }
         else
         {
@@ -280,7 +298,8 @@ public class Clemente {
             "I really like the idea of that.",
             "I haven't heard of that before.",
             "Really?",
-            "I think I could say the same."
+            "I think I could say the same.",
+            "I'm not getting annoying or repetitive, am I?"
     };
 
 
